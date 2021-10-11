@@ -1,0 +1,135 @@
+<div class="bg-white content-home" id="proposal">
+    <h3 class="font-center">Propuestas pendientes</h3>
+    <div class="bg-grey p-5 b-radius-4">
+        <form (ngSubmit)="listApplicationUsers()" autocomplete="false" [formGroup]="form" class="flex">
+            <div class="w-100">
+                <div class="flex">
+                    <mat-form-field class="full-width mb-20" style="margin: auto !important">
+                        <mat-label>Código de Usuario:</mat-label>
+                        <input matInput autocomplete="off" formControlName="codeID" />
+                    </mat-form-field>
+                    <mat-form-field class="full-width mb-20" style="margin: auto !important">
+                        <mat-label>Nombre de Usuario:</mat-label>
+                        <input matInput autocomplete="off" formControlName="documentIdNumber" />
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field class="full-width mb-20" style="margin: auto !important" (click)="picker.open()">
+                        <mat-label>Fecha inicial de tarea. Desde</mat-label>
+                        <input matInput [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field class="full-width mb-20" style="margin: auto !important" (click)="picker2.open()">
+                        <mat-label>Fecha inicial de tarea. Hasta</mat-label>
+                        <input matInput [matDatepicker]="picker2">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="flex-end">
+                    <button matButton type="reset" class="color-green button-transparent"
+                        (click)="form.reset">Limpiar</button>
+                    <button matButton type="submit" class="button-execute ml-10 "
+                        [disabled]="form.valid">Buscar</button>
+                </div>
+            </div>
+        </form>
+        </div>
+        <div class="bg-grey p-5 b-radius-4 mt-10">
+            Resultado de la búsqueda
+            <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
+                <ng-container matColumnDef="cmdl">
+                    <th class="header-doc" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Cód. MDL
+                    </th>
+
+                    <div class="cell-doc">
+                        <td mat-cell *matCellDef="let lista; let i = index">
+                            <!-- {{ lista.codigounico }} -->
+                        </td>
+                    </div>
+                </ng-container>
+                <ng-container matColumnDef="cu">
+                    <th class="header-doc" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        C.U.
+                    </th>
+
+                    <div class="cell-doc">
+                        <td mat-cell *matCellDef="let lista; let i = index">
+                            <!-- {{ lista.codigounico }} -->
+                        </td>
+                    </div>
+                </ng-container>
+                <ng-container matColumnDef="ruc">
+                    <th class="header-doc" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        RUC
+                    </th>
+
+                    <div class="cell-doc">
+                        <td mat-cell *matCellDef="let lista; let i = index">
+                            <!-- {{ lista.numerodocumento }} -->
+                        </td>
+                    </div>
+                </ng-container>
+                <ng-container matColumnDef="numerodocumento">
+                    <th class="header-doc" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Razón social
+                    </th>
+
+                    <div class="cell-doc">
+                        <td mat-cell *matCellDef="let lista; let i = index">
+                            <!-- {{ lista.razonsocial }} -->
+                        </td>
+                    </div>
+                </ng-container>
+                <ng-container matColumnDef="status">
+                    <th class="header-doc" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Estado
+                    </th>
+
+                    <div class="cell-doc">
+                        <td mat-cell *matCellDef="let lista; let i = index">
+                            <!-- {{ lista.codigounico }} -->
+                        </td>
+                    </div>
+                </ng-container>
+                <ng-container matColumnDef="enterDate">
+                    <th class="header-doc" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Fecha Ingreso
+                    </th>
+
+                    <div class="cell-doc">
+                        <td mat-cell *matCellDef="let lista; let i = index">
+                            <!-- {{ lista.codigounico }} -->
+                        </td>
+                    </div>
+                </ng-container>
+                <ng-container matColumnDef="typeOp">
+                    <th class="header-doc" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Tipo Operación
+                    </th>
+
+                    <div class="cell-doc">
+                        <td mat-cell *matCellDef="let lista; let i = index">
+                            <!-- {{ lista.codigounico }} -->
+                        </td>
+                    </div>
+                </ng-container>
+                <ng-container matColumnDef="dateTask">
+                    <th class="header-doc" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        F.Inicial Tarea
+                    </th>
+
+                    <div class="cell-doc">
+                        <td mat-cell *matCellDef="let lista; let i = index">
+                            <!-- {{ lista.codigounico }} -->
+                        </td>
+                    </div>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" style="height: 40px;"></tr>
+                <tr mat-row *matRowDef="let lista; columns: displayedColumns" class="element-row"
+                    (click)="getRowData(lista)"></tr>
+            </table>
+        </div>
+</div>

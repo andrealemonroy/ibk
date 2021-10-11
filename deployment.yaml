@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mdl-front-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: mdl-front
+  template:
+    metadata:
+      labels:
+        role: mdl-front
+    spec:
+      containers:
+      - name: mdl-front
+        image: acreu2c001mdldev01.azurecr.io/mdl-front:dev
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mdl-front-lb
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    role: mdl-front

@@ -1,0 +1,1163 @@
+<div class="bg-white content-home" id="proposal">
+  <h3 class="font-center">Capturar Propuesta</h3>
+  <div class="bg-grey p-5 b-radius-4">
+    <div>
+      <div class="flex-row flex-between my-2">
+        <div>Cod MDI: {{ codigounico }}</div>
+        <div>Fecha Solicitud: {{ requestDate | date: "shortDate" }}</div>
+      </div>
+      <div>
+        <hr class="line white" />
+      </div>
+      <div class="flex-row flex-between my-2">
+        <div><b>Código Único:</b> {{ codigounico }}</div>
+        <div><b>RUC:</b> {{ numerodocumento }}</div>
+        <div><b>Razón Social:</b> {{ razonsocial }}</div>
+      </div>
+      <div></div>
+    </div>
+  </div>
+  <div>
+    <mat-stepper #stepper>
+      <mat-step>
+        <ng-template matStepLabel>Datos del cliente</ng-template>
+        <div class="bg-grey p-10 b-radius-4">
+          <button class="button-search mb-5 flex" (click)="openDialog()">
+            <div
+              class="
+                px-5
+                background-green
+                p-5
+                flex
+                items-center
+                rounded-2xl
+                justify-center
+              "
+            >
+              <mat-icon class="material-icons">search</mat-icon> Buscar cliente
+            </div>
+          </button>
+          <form class="example-form" [formGroup]="dataClientForm">
+            <div class="grid">
+              <div class="full-width p-x-5 bg-white b-radius-4 pt-5">
+                <mat-form-field class="full-width bg-white">
+                  <mat-label>Código Único:</mat-label>
+                  <input
+                    matInput
+                    autocomplete="off"
+                    formControlName="codigounico"
+                  />
+                </mat-form-field>
+                <mat-form-field class="full-width bg-white">
+                  <mat-label>R.U.C:</mat-label>
+                  <input
+                    matInput
+                    autocomplete="off"
+                    formControlName="numerodocumento"
+                  />
+                </mat-form-field>
+                <br />
+                <mat-form-field class="full-width bg-white">
+                  <mat-label>Sector Económico Interno</mat-label>
+                  <input matInput autocomplete="off" formControlName="sei" />
+                </mat-form-field>
+                <br />
+                <mat-form-field class="full-width bg-white">
+                  <mat-label>Rating:</mat-label>
+                  <input matInput autocomplete="off" formControlName="rating" />
+                </mat-form-field>
+              </div>
+              <div class="full-width bg-white b-radius-4 pt-5">
+                <mat-form-field class="full-width bg-white">
+                  <mat-label>Nro. de propuesta:</mat-label>
+                  <input
+                    matInput
+                    autocomplete="off"
+                    formControlName="requestNumber"
+                  />
+                </mat-form-field>
+                <br />
+                <mat-form-field class="full-width bg-white">
+                  <mat-label>Razón Social:</mat-label>
+                  <input
+                    matInput
+                    autocomplete="off"
+                    formControlName="razonsocial"
+                  />
+                </mat-form-field>
+                <br />
+                <mat-form-field class="full-width bg-white">
+                  <mat-label>Ejecutivo de Negocios:</mat-label>
+                  <input matInput autocomplete="off" />
+                </mat-form-field>
+                <br />
+                <mat-form-field class="full-width bg-white">
+                  <mat-label>Fecha de Actualización Rating:</mat-label>
+                  <input
+                    matInput
+                    autocomplete="off"
+                    formControlName="dateUpdateRating"
+                  />
+                </mat-form-field>
+                <br />
+                <mat-form-field class="full-width bg-white">
+                  <mat-label>Fecha de Evaluación Rating:</mat-label>
+                  <input
+                    matInput
+                    autocomplete="off"
+                    formControlName="dateTestRating"
+                  />
+                </mat-form-field>
+              </div>
+              <div>
+                <h4>Importante</h4>
+                <br />
+                <div class="bg-white h-5/6 w-100 m-auto rounded-md p-5">
+                  Texto var
+                </div>
+              </div>
+            </div>
+            <div class="flex-between mt-10">
+              <div class="flex-between">
+                <button mat-mini-fab class="button">
+                  <mat-icon class="material-icons md-18" (click)="save()"
+                    >save</mat-icon
+                  >
+                </button>
+                <button mat-mini-fab class="button ml-10" *ngIf="showPrint">
+                  <mat-icon class="material-icons md-18" (click)="openPDF()"
+                    >print</mat-icon
+                  >
+                </button>
+              </div>
+              <div class="flex-between">
+                <button mat-mini-fab matStepperNext class="button">
+                  <mat-icon class="material-icons md-18"
+                    >navigate_next</mat-icon
+                  >
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Estados financieros</ng-template>
+        <div class="bg-grey p-5 b-radius-4">
+          <div class="full-width bg-white p-5 b-radius-4">
+            <div class="grid-finantial-state">
+              <form
+                class="example-form"
+                [formGroup]="eeffAuditForm"
+                *ngIf="dateOfEEFFAudit"
+              >
+                <h4 class="green fw-600 pl-15">
+                  Balance de Auditada en {{ currencyEEFF }}
+                </h4>
+                <div
+                  class="
+                    flex-between
+                    bg-grey
+                    tag-balance
+                    p-y-5 p-x-5
+                    b-radius-4
+                  "
+                >
+                  <div class="flex">
+                    <span class="green">Tipo de EEFF: </span>
+                    <span>{{ typeOfEEFFAudit }}</span>
+                  </div>
+                  <div class="flex">
+                    <span class="green">Fecha de EEFF: </span>
+                    <span>{{ dateOfEEFFAudit }}</span>
+                  </div>
+                </div>
+                <div class="flex-field m-auto">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+  Activo Corriente: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="currentAssets"
+                        style="text-align: right !important"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="flex-field m-auto">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+  Patrimonio: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="heritage"
+                        style="text-align: right !important"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="flex-field m-auto">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+  Ventas Netas: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="netProfit"
+                        style="text-align: right !important"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="flex-field m-auto">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+  EBITDA: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="EBITDA"
+                        style="text-align: right !important"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="flex-field m-auto">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+  Capital Trabajo: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="workingCapital"
+                        style="text-align: right !important"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="flex-field m-auto">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+  Activo Total: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="totalActive"
+                        style="text-align: right !important"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+              </form>
+
+              <form class="example-form" [formGroup]="eeffSituationForm">
+                <h4 class="green fw-600 pl-15">
+                  Balance de Situación en {{ currencyEEFF }}
+                </h4>
+                <div
+                  class="
+                    flex-between
+                    bg-grey
+                    tag-balance
+                    p-y-5 p-x-5
+                    b-radius-4
+                  "
+                >
+                  <div class="flex">
+                    <span class="green">Tipo de EEFF: </span>
+                    <span>{{ typeOfEEFFSituation }}</span>
+                  </div>
+                  <div class="flex">
+                    <span class="green">Fecha de EEFF: </span>
+                    <span>{{ dateOfEEFFSituation }}</span>
+                  </div>
+                </div>
+                <div class="flex-field m-auto">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+Activo Corriente: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="currentAssets"
+                        style="text-align: right !important"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="flex-field m-auto">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+Patrimonio: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="heritage"
+                        style="text-align: right !important"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="flex-field m-auto">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+Ventas Netas: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="netProfit"
+                        style="text-align: right !important"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="flex-field m-auto">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+EBITDA: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="EBITDA"
+                        style="text-align: right !important"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="flex-field m-auto">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+Capital Trabajo: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="workingCapital"
+                        style="text-align: right !important"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="flex-field m-auto">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+Activo Total: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="totalActive"
+                        style="text-align: right !important"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+              </form>
+
+              <form
+                class="example-form"
+                [formGroup]="eeffSunatForm"
+                *ngIf="dateOfEEFFSunat"
+              >
+                <h4 class="green fw-600 pl-15">
+                  Balance de Sunat en {{ currencyEEFF }}
+                </h4>
+                <div
+                  class="
+                    flex-between
+                    bg-grey
+                    tag-balance
+                    p-y-5 p-x-5
+                    b-radius-4
+                  "
+                >
+                  <div class="flex">
+                    <span class="green">Tipo de EEFF: </span>
+                    <span>{{ typeOfEEFFSunat }}</span>
+                  </div>
+                  <div class="flex">
+                    <span class="green">Fecha de EEFF: </span>
+                    <span>{{ typeOfEEFFSunat }}</span>
+                  </div>
+                </div>
+                <div class="flex-field m-auto">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+Activo Corriente: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="currentAssets"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="flex-field m-auto">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+Patrimonio: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="heritage"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="flex-field m-auto">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+Ventas Netas: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="netProfit"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="flex-field m-auto">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+EBITDA: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="EBITDA"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="flex-field m-auto">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+Capital Trabajo: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="workingCapital"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="flex-field m-auto">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+Activo Total: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="totalActive"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="flex-between mt-10">
+            <div class="flex-between">
+              <button mat-mini-fab class="button">
+                <mat-icon class="material-icons md-18" (click)="save()"
+                  >save</mat-icon
+                >
+              </button>
+              <button mat-mini-fab class="button ml-10" *ngIf="showPrint">
+                <mat-icon class="material-icons md-18" (click)="openPDF()"
+                  >print</mat-icon
+                >
+              </button>
+            </div>
+            <div class="flex-between">
+              <button mat-mini-fab matStepperNext class="button">
+                <mat-icon class="material-icons md-18">chevron_left</mat-icon>
+              </button>
+              <button mat-mini-fab matStepperNext class="button ml-10">
+                <mat-icon class="material-icons md-18">navigate_next</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Posición</ng-template>
+        <div class="bg-grey p-5 b-radius-4">
+          <form class="example-form" [formGroup]="positionForm">
+            <h4 class="green fw-600 pl-15">Posición Interna en IBK</h4>
+            <div class="grid-position">
+              <div class="full-width p-10 b-radius-4">
+                <div class="flex-field position">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+RM Líneas de Crédito: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="numerormlinea"
+                        style="text-align: right !important"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="flex-field position">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+RM Op Puntuales: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="numerormoperpunt"
+                        style="text-align: right !important"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="flex-field position">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+RM total: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="numrmtotal"
+                        style="text-align: right !important"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="flex-field position">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+RM Utilizado en el Mediano Plazo: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="numrmutilizado"
+                        style="text-align: right !important"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="flex-field position">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+Saldo Pasivo Promedio en el último año: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="numsaldopasivo"
+                        style="text-align: right !important"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="flex-between mt-10">
+            <div class="flex-between">
+              <button mat-mini-fab class="button">
+                <mat-icon class="material-icons md-18" (click)="save()"
+                  >save</mat-icon
+                >
+              </button>
+              <button mat-mini-fab class="button ml-10" *ngIf="showPrint">
+                <mat-icon class="material-icons md-18" (click)="openPDF()"
+                  >print</mat-icon
+                >
+              </button>
+            </div>
+            <div class="flex-between">
+              <button mat-mini-fab matStepperNext class="button">
+                <mat-icon class="material-icons md-18">chevron_left</mat-icon>
+              </button>
+              <button mat-mini-fab matStepperNext class="button ml-10">
+                <mat-icon class="material-icons md-18">navigate_next</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Garantías</ng-template>
+        <div class="bg-grey p-5 b-radius-4">
+          <form class="example-form" [formGroup]="warrantyForm">
+            <h4 class="green fw-600 pl-15">Posición Interna en IBK</h4>
+            <div class="grid-position">
+              <div class="full-width p-5 b-radius-4">
+                <div class="flex-field warranty pt-10">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+Garantía Existente: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="realizationValue"
+                        style="text-align: right"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="flex-field warranty">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+Garantía Adicional: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="aditionalWarranty"
+                        (input)="calculateTotalWarranty($event)"
+                        style="text-align: right"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="flex-field warranty">
+                  <pre
+                    style="
+                      padding-top: 8px;
+                      font: 400 14px/20px Poppins, sans-serif;
+                    "
+                    class="green"
+                  >
+Garantía Total: </pre
+                  >
+                  <div>
+                    <mat-form-field>
+                      <input
+                        matInput
+                        autocomplete="off"
+                        formControlName="totalWarranty"
+                        style="text-align: right"
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="h-4 px-2">
+                  <div *ngIf="ifErrorWarranty" class="text-red-500">{{ errorWarranty }}</div>
+                </div>
+                <div class="w-80 flex-end container-button-execute">
+                  <div
+                    class="
+                      background-green
+                      mb-10
+                      p-5
+                      px-10
+                      text-white
+                      rounded-2xl
+                      cursor-pointer
+                      w-24
+                      text-center
+                    "
+                    (click)="calculate()"
+                    matStepperNext
+                  >
+                    Ejecutar
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="flex-between mt-10">
+            <div class="flex-between">
+              <button mat-mini-fab class="button">
+                <mat-icon class="material-icons md-18" (click)="save()"
+                  >save</mat-icon
+                >
+              </button>
+              <button mat-mini-fab class="button ml-10" *ngIf="showPrint">
+                <mat-icon class="material-icons md-18" (click)="openPDF()"
+                  >print</mat-icon
+                >
+              </button>
+            </div>
+            <div class="flex-between">
+              <button mat-mini-fab matStepperNext class="button">
+                <mat-icon class="material-icons md-18">chevron_left</mat-icon>
+              </button>
+              <button mat-mini-fab matStepperNext class="button ml-10">
+                <mat-icon class="material-icons md-18">navigate_next</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Riesgo máximo</ng-template>
+        <div class="bg-grey p-5 b-radius-4">
+          <h4 class="green fw-600 pl-15">
+            Riesgo máximo calculados por el MDL
+          </h4>
+          <p class="mx-20">Autonomía</p>
+          <form class="example-form">
+            <div class="grid-max-risk">
+              <div class="bg-white p-5 b-radius-4 ml-10 grid-risk">
+                <div class="flex-between">
+                  <h4 class="green fw-600">Con Garantía Existente</h4>
+                  <mat-checkbox [(ngModel)]="first" name="first"></mat-checkbox>
+                </div>
+                <mat-form-field>
+                  <mat-label>RM CP:</mat-label>
+                  <input matInput autocomplete="off" />
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Garantía Existente:</mat-label>
+                  <input matInput autocomplete="off" />
+                </mat-form-field>
+              </div>
+              <div class="bg-white p-5 b-radius-4 grid-risk">
+                <div class="flex-between">
+                  <h4 class="green fw-600">
+                    Con Garantía Existente + Adicional
+                  </h4>
+                  <mat-checkbox
+                    [(ngModel)]="second"
+                    name="second"
+                  ></mat-checkbox>
+                </div>
+                <mat-form-field>
+                  <mat-label>RM CP:</mat-label>
+                  <input matInput autocomplete="off" />
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Garantía Existente:</mat-label>
+                  <input matInput autocomplete="off" />
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Garantía Adicional:</mat-label>
+                  <input matInput autocomplete="off" />
+                </mat-form-field>
+              </div>
+              <div class="bg-white p-5 b-radius-4 grid-risk">
+                <div class="flex-between">
+                  <h4 class="green fw-600">Con Máxima</h4>
+                  <mat-checkbox [(ngModel)]="third" name="third"></mat-checkbox>
+                </div>
+
+                <mat-form-field>
+                  <mat-label>RM CP:</mat-label>
+                  <input matInput autocomplete="off" />
+                </mat-form-field>
+                <mat-form-field>
+                  <mat-label>Garantía Existente:</mat-label>
+                  <input matInput autocomplete="off" />
+                </mat-form-field>
+              </div>
+              <div>
+                <h4>Importante</h4>
+                <br />
+                <div class="bg-white h-5/6 w-100 m-auto rounded-md p-5">
+                  Texto var
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="flex-between mt-10">
+            <div class="flex-between">
+              <button mat-mini-fab class="button">
+                <mat-icon class="material-icons md-18" (click)="save()"
+                  >save</mat-icon
+                >
+              </button>
+              <button mat-mini-fab class="button ml-10" *ngIf="showPrint">
+                <mat-icon class="material-icons md-18" (click)="openPDF()"
+                  >print</mat-icon
+                >
+              </button>
+            </div>
+          </div>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</div>
+<div>
+  <div class="col-md-8" id="htmlData">
+    <div>
+      <h2>Datos Cliente</h2>
+      <table>
+        <tr>
+          <th>Nº Propuesta WF</th>
+          <th></th>
+          <th>Ejecutivo de Negocios</th>
+          <th></th>
+        </tr>
+        <tr>
+          <td>C.U.</td>
+          <td>{{ codigounico }}</td>
+          <td>Solicitud MDL</td>
+          <td>{{ requestNumber }}</td>
+        </tr>
+        <tr>
+          <td>RUC</td>
+          <td>{{ numerodocumento }}</td>
+          <td>Código SEI</td>
+          <td>{{ sei }}</td>
+        </tr>
+        <tr>
+          <td>Rating cliente</td>
+          <td>{{ numerodocumento }}</td>
+          <td>Fecha Evaluación Rating</td>
+          <td>{{ sei }}</td>
+        </tr>
+        <tr>
+          <td>Fecha Solicitud</td>
+          <td>{{ requestDate | date: "shortDate" }}</td>
+          <td>Fecha Actualización Rating</td>
+          <td>{{ dateUpdateRating }}</td>
+        </tr>
+      </table>
+    </div>
+    <div>
+      <h2>Estados Financieros</h2>
+      <div class="flex">
+        <table
+          class="table table-bordered"
+          *ngFor="let estadoFinaciero of estadosFinancieros"
+        >
+          <tr class="table-primary">
+            <th colspan="2">
+              Balance de
+              <span *ngIf="estadoFinaciero.codeTypeEEFF === 1">Situación </span
+              ><span *ngIf="estadoFinaciero.codeTypeEEFF === 2">SUNAT </span
+              ><span *ngIf="estadoFinaciero.codeTypeEEFF === 3">Auditada </span
+              >en {{ estadoFinaciero.currency }}
+            </th>
+          </tr>
+          <tr>
+            <td>Fecha del EEFF</td>
+            <td>{{ estadoFinaciero.dateEEFF }}</td>
+          </tr>
+          <tr>
+            <td>Activo Corriente</td>
+            <td>{{ estadoFinaciero.currentAssets }}</td>
+          </tr>
+          <tr>
+            <td>Patrimonio</td>
+            <td>{{ estadoFinaciero.heritage }}</td>
+          </tr>
+          <tr>
+            <td>Ventas Netas</td>
+            <td>{{ estadoFinaciero.netProfit }}</td>
+          </tr>
+          <tr>
+            <td>EBITDA</td>
+            <td>{{ estadoFinaciero.EBITDA }}</td>
+          </tr>
+          <tr>
+            <td>Capital Trabajo</td>
+            <td>{{ estadoFinaciero.workingCapital }}</td>
+          </tr>
+          <tr>
+            <td>Activo Total</td>
+            <td>{{ estadoFinaciero.totalActive }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div>
+      <h2>Posición</h2>
+      <table class="table table-bordered">
+        <tr>
+          <td>RM Líneas de Crédito</td>
+          <td></td>
+          <td>RM Op. Puntuales</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>RM Total</td>
+          <td></td>
+          <td>Saldo Pasivo Promedio en el último año</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>RM Utilizado en MP</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+    <div>
+      <h2>Garantías</h2>
+      <table class="table table-bordered">
+        <tr>
+          <td>Garantía Existente</td>
+          <td></td>
+          <td>Garantía Adicional</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Garantía Total</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+    <div>
+      <h2>Riesgos máximos</h2>
+      <table class="table table-bordered">
+        <tr class="table-primary">
+          <th colspan="2">Riesgos Máximos calculados por el MdL</th>
+          <th colspan="2">Riesgo máximo modificado por Ejecutivo - Nombre</th>
+        </tr>
+        <tr>
+          <td>Autonomía</td>
+          <td></td>
+          <td>RM Alertas</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Riesgo Seleccionado</td>
+          <td></td>
+          <td>Riesgo Seleccionado</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>RM CP</td>
+          <td></td>
+          <td>RM CP</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Garantía Existente</td>
+          <td></td>
+          <td>Garantía Existente</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Garantía Adicional</td>
+          <td></td>
+          <td>Garantía Adicional</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Garantía Requerida</td>
+          <td></td>
+          <td>Garantía Requerida</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>RM Utilizado en MP</td>
+          <td></td>
+          <td>RM Utilizado en MP</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>CEI LP <br />Motivo de Cambio</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>CEI CP</td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+    <div>Observaciones:</div>
+  </div>
+</div>

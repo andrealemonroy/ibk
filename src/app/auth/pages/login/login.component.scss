@@ -1,0 +1,129 @@
+.container-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 50% 50%;
+  }
+  
+  .left {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    align-items: center;
+    vertical-align: middle;
+    height: calc(100vh - 170px);
+    flex-direction: column;
+  }
+  
+  .right{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    align-items: center;
+    vertical-align: middle;
+    height: 100vh;
+    background-color: #f0f0f0;
+    color: #000
+  }
+  
+  
+  
+  .card-login{
+    width: 300px;
+    background-color: #e9e9e9;
+    color: #000;
+    border: 3px solid #fff;
+    padding: 40px;
+    border-radius: 30px
+  }
+  
+  .mat-form-field{
+    width: 100% !important;
+    color: #000 !important
+  }
+  
+  input{
+    color: #000
+  }
+  
+  
+  //
+  
+  .example-container .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+  
+  .example-right-align {
+    text-align: right;
+  }
+  
+  input.example-right-align::-webkit-outer-spin-button,
+  input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+  }
+  
+  input.example-right-align {
+    -moz-appearance: textfield;
+  }
+  
+  :host::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline{
+    color: black !important
+  }
+  
+  :host::ng-deep mat-label{
+    color: black !important
+  }
+  
+  // :host::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label{
+  //   padding: 10px !important;
+  //   color: grey !important
+  // }
+  
+  :host::ng-deep .mat-form-field-underline{
+    display: none !important
+  }
+  
+  :host::ng-deep .mat-card-header-text{
+    text-align: left !important;
+    width: 100%;
+    color: #6f6f6f;
+    margin: 10px 0;
+  }
+  
+  .mat-card-title{
+    font-size: 24px
+  }
+  
+  .btn-block{
+    border-radius: 30px;
+    background-color: #009c2d;
+    color: #fff;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  :host::ng-deep .mat-form-field-appearance-outline .mat-form-field-wrapper, :host::ng-deep .mat-card-content{
+    margin: 0
+  }
+  
+  .text-left{
+    color: #fff;
+    margin: 20px auto;
+    padding: 0 20px;
+    font-size: 24px
+  }
+  
+  .text-left h3{
+    font-size: 32px
+  }
+  
+  .font-16{
+    font-size: 16px;
+  }
+  
+  .font-24{
+    font-size: 24px;
+  }
+  

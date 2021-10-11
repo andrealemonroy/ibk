@@ -1,0 +1,69 @@
+:host::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline {
+    color: black !important;
+  }
+
+  :host::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+
+  :host::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+    bottom: 0.25em !important;
+  }
+
+  :host::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+    background-color: #000 !important;
+  }
+
+  :host::ng-deep.mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    width: 90% !important;
+    margin: 0 !important;
+    // padding: 10px 0;
+  }
+
+  .mat-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button{
+    padding: 0 !important;
+    min-width: 0 !important;
+  }
+
+  :host::ng-deep.mat-dialog-container {
+    background: #fff !important;
+    padding: 16px !important;
+  }
+  .button-search-client, .button-clean-client{
+    border-radius: 30px;
+    border: 1px solid #009c2d;
+    width: 100px;
+  }
+
+  .button-clean-client{
+    background-color: #fff;
+    color: #009c2d;
+    cursor: pointer;
+  }
+
+  .button-search-client{
+    background-color: #009c2d;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .flex{
+    display: flex;
+  }
+
+  .f-around{
+    justify-content: space-around;
+  }
+  .f-between{
+    justify-content: space-between;
+  }
+
+  ::ng-deep{
+    .mat-dialog-title{
+      margin: 0 !important
+    }
+  }
+
+  .element-row{
+    cursor: pointer;
+  }
