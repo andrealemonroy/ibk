@@ -4,7 +4,7 @@
     <div>
       <div class="flex-row flex-between my-2">
         <div>Cod MDI: {{ codigounico }}</div>
-        <div>Fecha Solicitud: {{ requestDate | date: "shortDate" }}</div>
+        <div>Fecha Solicitud: {{ requestDate }}</div>
       </div>
       <div>
         <hr class="line white" />
@@ -46,6 +46,7 @@
                     matInput
                     autocomplete="off"
                     formControlName="codigounico"
+                    readonly
                   />
                 </mat-form-field>
                 <mat-form-field class="full-width bg-white">
@@ -54,17 +55,18 @@
                     matInput
                     autocomplete="off"
                     formControlName="numerodocumento"
+                    readonly
                   />
                 </mat-form-field>
                 <br />
                 <mat-form-field class="full-width bg-white">
                   <mat-label>Sector Económico Interno</mat-label>
-                  <input matInput autocomplete="off" formControlName="sei" />
+                  <input matInput autocomplete="off" formControlName="sei" readonly/>
                 </mat-form-field>
                 <br />
                 <mat-form-field class="full-width bg-white">
                   <mat-label>Rating:</mat-label>
-                  <input matInput autocomplete="off" formControlName="rating" />
+                  <input matInput autocomplete="off" formControlName="rating" readonly/>
                 </mat-form-field>
               </div>
               <div class="full-width bg-white b-radius-4 pt-5">
@@ -74,6 +76,7 @@
                     matInput
                     autocomplete="off"
                     formControlName="requestNumber"
+                    readonly
                   />
                 </mat-form-field>
                 <br />
@@ -83,12 +86,14 @@
                     matInput
                     autocomplete="off"
                     formControlName="razonsocial"
+                    readonly
                   />
                 </mat-form-field>
                 <br />
                 <mat-form-field class="full-width bg-white">
                   <mat-label>Ejecutivo de Negocios:</mat-label>
-                  <input matInput autocomplete="off" />
+                  <input matInput autocomplete="off" 
+                  readonly/>
                 </mat-form-field>
                 <br />
                 <mat-form-field class="full-width bg-white">
@@ -97,6 +102,7 @@
                     matInput
                     autocomplete="off"
                     formControlName="dateUpdateRating"
+                    readonly
                   />
                 </mat-form-field>
                 <br />
@@ -106,6 +112,7 @@
                     matInput
                     autocomplete="off"
                     formControlName="dateTestRating"
+                    readonly
                   />
                 </mat-form-field>
               </div>
@@ -189,6 +196,7 @@
                         autocomplete="off"
                         formControlName="currentAssets"
                         style="text-align: right !important"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -231,6 +239,7 @@
                         autocomplete="off"
                         formControlName="netProfit"
                         style="text-align: right !important"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -252,6 +261,7 @@
                         autocomplete="off"
                         formControlName="EBITDA"
                         style="text-align: right !important"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -273,6 +283,7 @@
                         autocomplete="off"
                         formControlName="workingCapital"
                         style="text-align: right !important"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -294,6 +305,7 @@
                         autocomplete="off"
                         formControlName="totalActive"
                         style="text-align: right !important"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -339,6 +351,7 @@ Activo Corriente: </pre
                         autocomplete="off"
                         formControlName="currentAssets"
                         style="text-align: right !important"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -360,6 +373,7 @@ Patrimonio: </pre
                         autocomplete="off"
                         formControlName="heritage"
                         style="text-align: right !important"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -381,6 +395,7 @@ Ventas Netas: </pre
                         autocomplete="off"
                         formControlName="netProfit"
                         style="text-align: right !important"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -402,6 +417,7 @@ EBITDA: </pre
                         autocomplete="off"
                         formControlName="EBITDA"
                         style="text-align: right !important"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -423,6 +439,7 @@ Capital Trabajo: </pre
                         autocomplete="off"
                         formControlName="workingCapital"
                         style="text-align: right !important"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -444,6 +461,7 @@ Activo Total: </pre
                         autocomplete="off"
                         formControlName="totalActive"
                         style="text-align: right !important"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -492,6 +510,7 @@ Activo Corriente: </pre
                         matInput
                         autocomplete="off"
                         formControlName="currentAssets"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -512,6 +531,7 @@ Patrimonio: </pre
                         matInput
                         autocomplete="off"
                         formControlName="heritage"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -532,6 +552,7 @@ Ventas Netas: </pre
                         matInput
                         autocomplete="off"
                         formControlName="netProfit"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -552,6 +573,7 @@ EBITDA: </pre
                         matInput
                         autocomplete="off"
                         formControlName="EBITDA"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -572,6 +594,7 @@ Capital Trabajo: </pre
                         matInput
                         autocomplete="off"
                         formControlName="workingCapital"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -592,6 +615,7 @@ Activo Total: </pre
                         matInput
                         autocomplete="off"
                         formControlName="totalActive"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -647,6 +671,7 @@ RM Líneas de Crédito: </pre
                         autocomplete="off"
                         formControlName="numerormlinea"
                         style="text-align: right !important"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -668,6 +693,7 @@ RM Op Puntuales: </pre
                         autocomplete="off"
                         formControlName="numerormoperpunt"
                         style="text-align: right !important"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -689,6 +715,7 @@ RM total: </pre
                         autocomplete="off"
                         formControlName="numrmtotal"
                         style="text-align: right !important"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -710,6 +737,7 @@ RM Utilizado en el Mediano Plazo: </pre
                         autocomplete="off"
                         formControlName="numrmutilizado"
                         style="text-align: right !important"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -731,6 +759,7 @@ Saldo Pasivo Promedio en el último año: </pre
                         autocomplete="off"
                         formControlName="numsaldopasivo"
                         style="text-align: right !important"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -786,6 +815,7 @@ Garantía Existente: </pre
                         autocomplete="off"
                         formControlName="realizationValue"
                         style="text-align: right"
+                        readonly
                       />
                     </mat-form-field>
                   </div>
@@ -826,6 +856,7 @@ Garantía Total: </pre
                     <mat-form-field>
                       <input
                         matInput
+                        readonly
                         autocomplete="off"
                         formControlName="totalWarranty"
                         style="text-align: right"
@@ -1060,19 +1091,19 @@ Garantía Total: </pre
       <table class="table table-bordered">
         <tr>
           <td>RM Líneas de Crédito</td>
-          <td></td>
+          <td>{{ numerormlinea  }}</td>
           <td>RM Op. Puntuales</td>
-          <td></td>
+          <td>{{ numerormoperpunt }}</td>
         </tr>
         <tr>
           <td>RM Total</td>
-          <td></td>
+          <td>{{ numrmtotal }}</td>
           <td>Saldo Pasivo Promedio en el último año</td>
-          <td></td>
+          <td>{{ numrmutilizado }}</td>
         </tr>
         <tr>
           <td>RM Utilizado en MP</td>
-          <td></td>
+          <td>{{ numsaldopasivo }}</td>
           <td></td>
           <td></td>
         </tr>

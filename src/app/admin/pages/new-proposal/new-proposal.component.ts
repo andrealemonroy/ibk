@@ -39,6 +39,11 @@ export class NewProposalComponent implements OnInit {
   third: boolean = false;
   ifErrorWarranty: boolean = false;
   errorWarranty: string = '';
+  numerormlinea: any;
+  numerormoperpunt: any;
+  numrmtotal: any;
+  numrmutilizado: any;
+  numsaldopasivo: any;
   constructor(
     public dialog: MatDialog,
     private fb: FormBuilder,
@@ -48,6 +53,7 @@ export class NewProposalComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     localStorage.clear();
+    this.requestDate = this.requestDate.toLocaleDateString("en-GB", { year: '2-digit', month: '2-digit', day: '2-digit' })
   }
   dataClientForm: FormGroup = this.fb.group({
     requestNumber: [''],
@@ -242,12 +248,22 @@ export class NewProposalComponent implements OnInit {
         .subscribe((res) => {
           try {
             this.positionForm.setValue({
-              numerormlinea: res.numerormlinea,
-              numerormoperpunt: res.numerormoperpunt,
-              numrmtotal: res.numrmtotal,
-              numrmutilizado: res.numrmutilizado,
-              numsaldopasivo: res.numsaldopasivo,
+              numerormlinea: res.numerormlinea.toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+              numerormoperpunt: res.numerormoperpunt.toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+              numrmtotal: res.numrmtotal.toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+              numrmutilizado: res.numrmutilizado.toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+              numsaldopasivo: res.numsaldopasivo.toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ','),
             });
+            this.numerormlinea = res.numerormlinea
+            this.numerormoperpunt =  res.numerormoperpunt
+            this.numrmtotal = res.numrmtotal
+            this.numrmutilizado = res.numrmutilizado
+            this.numsaldopasivo = res.numsaldopasivo
           } catch (err) {
             console.log(err);
           }
@@ -277,6 +293,7 @@ export class NewProposalComponent implements OnInit {
         .replace(/\B(?=(\d{3})+(?!\d))/g, ','),
     });
   }
+
   get getClientData() {
     return this.userData$;
   }
@@ -288,9 +305,9 @@ export class NewProposalComponent implements OnInit {
     if (DATA) {
       html2canvas(DATA).then((canvas) => {
         const FILEURI = canvas.toDataURL('image/png');
-        let PDF = new jsPDF('p', 'mm', [300, 400]);
+        let PDF = new jsPDF('p', 'mm', [300, 300]);
         let position = 0;
-        PDF.addImage(FILEURI, 'PNG', 0, position, 300, 400);
+        PDF.addImage(FILEURI, 'PNG', 0, position, 300, 300);
 
         PDF.save('mdl.pdf');
 
